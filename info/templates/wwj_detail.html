@@ -1,0 +1,217 @@
+{% extends "base.html" %}
+
+{% block title %}
+    info
+{% endblock %}
+
+{% block extra_head %}
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+<link rel="stylesheet" type="text/css" href="/static/css/info/reset.css">
+<link rel="stylesheet" type="text/css" href="/static/css/info/style.css">
+
+<script src="/static/js/django-ajax-post.js"></script>
+
+{% endblock %}
+
+
+{% block content %}
+
+<div id="wrap">
+
+	<!--nav 头部-->
+	 {% include "includes/nav.html" %} 
+	<!--end nav-->
+<!--导航条-->
+	<ul class="breadcrumb">
+	    <li><a href="/">首页</a> <span class="divider">/</span></li>
+	    <li><a href="/info" >资讯</a><span class="divider">/</span></li>
+	    <li class='active'>{{information}}</li>
+	</ul>
+
+	<!--中间内容-->
+	<div class="row" >
+		<div id="consult-wrap" class="span7 offset1 ">
+
+    {% load markup %}
+	{% load taggit_extras %}
+	{% get_taglist as tags for 'info' %}
+
+			<!--begin content-->
+			<div id="content-wrap" >
+				<div id="userface" class="span1">
+					<img style="width:70px;height:70px;" src="/static/img/newstudents/c.jpg">
+				</div>
+				<div id="content" class="span6">
+				<div id="padding">
+					<div id="title">
+					</div>
+
+					<a href="/info/i/{{information.id}}"><h3>{{information}}</h3></a>
+					<p  class="muted" >
+						{{information.owner}} 发布于：{{information.pub_date|date:"y-m-d h:m"}}
+						<span class="pull-right">
+							{% if information.ishosting %}
+								<span class="text-error">托管金额:</span>￥<span class="badge badge-warning">{{information.ishosting}}</span>
+							{% endif %}
+							
+
+						</span>
+					</p>
+					<div id="markdown" style="fnot-size:16px;">
+						{{information.content|markdown}} <!--markdown-->
+					</div>
+
+
+
+
+
+
+					<div id="label">
+						<ul class="inline">
+							{% for itemtag in item.tags.all %}
+							<li id="tag"><a href="/info/tag/{{itemtag}}">{{itemtag}}</a></li>
+							{% endfor %}
+						</ul>
+					</div>
+
+					<div id="act">
+						{% load user_info %}
+						<ul class="inline">
+							{% if  user|viewed:information.id %}
+								<li><a href="#myModal_view" id="view" url="#" class="btn btn-primary" ><i class="icon-heart icon-white"></i>  已关注</a></li>								
+								{% else %}
+								<li><a href="#myModal_view" id="view" url="/info/view/{{information.id}}/" class="btn btn-primary" ><i class="icon-heart icon-white"></i>  关注</a></li>
+							{% endif %}
+							<li><a class="btn btn-primary" href="#comment"><i class="icon-comment icon-white"></i>  回应</a></li>
+							<li><a href="#myModal" role="button" class="btn btn-primary" data-toggle="modal"><i class="icon-share icon-white"></i>  分享</a></li>
+							
+
+							
+
+						{# 模态 #}
+							<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+							  <div class="modal-header">
+							    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+							    <h3 id="myModalLabel">分享</h3>
+							  </div>
+							  <div class="modal-body">
+							    {% include "includes/bshare.html" %}
+							  </div>
+							  <div class="modal-footer">
+							    <button class="btn btn-primary" data-dismiss="modal" aria-hidden="true">关闭</button>
+							  </div>
+
+							</div>
+							 <!--  关注 -->
+							 <div id="myModal_view" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+							  <div class="modal-header">
+							    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+							    <h3 id="myModalLabel">关注</h3>
+							  </div>
+							  <div class="modal-body">
+								<form action="/info/view/{{information.id}}/" method="post" accept-charset="utf-8">
+								{% csrf_token %}
+								<input type="submit" class="btn -btn-large btn-primary" name="" value="确定">
+								</form>							  
+						      </div>
+							  <div class="modal-footer">
+							    <button class="btn btn-primary" data-dismiss="modal" aria-hidden="true">关闭</button>
+							  </div>	
+							</div>
+						{# end 模态 #}
+
+						</ul>
+					</div>
+
+					<div id="comment" class="span5">
+						{% load duoshuo_tags %}
+						{% duoshuo_comments %}
+					</div>
+				</div>
+				</div>
+			</div>
+			<!--end content-->
+
+
+		</div>
+		<div id="aside" class="span3">
+			<div id="side-search">
+				<form action="/info/search/" method="get">
+   					<div class="input-prepend">
+   	 					<div class="btn-group">
+    						<button type="submit" class="btn" >搜索</button>
+    					</div>
+    					<input class="span2" name="title"  id="prependedDropdownButton" type="text" placeholder="搜索">
+    				</div>
+				</form>
+
+				<div id="label-href">
+					<ul>
+						<li style="color:white; background-color:#0088CC;"><span id="icon"></span><span>分类</span></li>
+						
+							
+						{% for category in categories %}
+						<a href="/info/categories/{{category.id}}"><li><span id="icon"></span><span><i class="icon-tags"></i>  {{category.name}}</span></li></a>
+						{% endfor %}
+						
+
+						
+						<a href="#"><li><span id="icon"></span><span id="label-more">更多分类...</span></li></a>
+					</ul>
+				</div>
+
+				<div id="label-href">
+					<ul>
+					<li style="color:white; background-color:#0088CC;"><span id="icon"></span><span>标签</span></li>
+					{% for tag in tags %}
+						<a href="/info/tag/{{tag}}"><li><span id="icon"></span><span><i class="icon-tags"></i>  {{tag}}({{tag.num_times}})</span></li></a>
+					{% endfor %}
+						<a href="#"><li><span id="icon"></span><span id="label-more">更多标签...</span></li></a>
+					</ul>
+				</div>
+
+				
+
+			</div>
+
+		</div>
+	</div>
+
+
+<!--底部-->
+	<!--footer 底部-->
+	{% include "includes/footer.html" %}
+	<!--end footer-->
+
+
+</div>
+
+{% endblock %} 
+
+
+{# /info/view/{{information.id}} #}
+
+
+
+{# js部分 #}
+
+{% block on_ready %}
+
+// 可用django模板
+
+$("#view").click(function(){
+   $.ajax({
+     type: "POST",
+     url: $("#view").attr('url'),
+     data: 'hello',
+     success: function(data){
+      $("#view").html('<i class="icon-heart icon-white"></i>  已关注</a>');
+     },
+     error: function(){
+      alert("sorry,something wrong");
+     }
+    }); 
+});
+
+
+{% endblock %}

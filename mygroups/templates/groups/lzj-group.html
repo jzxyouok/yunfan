@@ -1,0 +1,164 @@
+{% extends "base.html" %}<!--nav 头部-->
+	 {% include "includes/nav.html" %} 
+	<!--end nav-->
+{% block title %}
+   {{group.title}}
+{% endblock %}
+
+{% block extra_head %}
+<link rel="stylesheet" type="text/css" href="/static/css/group/reset.css">
+<link rel="stylesheet" type="text/css" href="/static/css/group/bootstrap-tag.css">
+<link rel="stylesheet" type="text/css" href="/static/css/group/style.css">
+{% endblock %}
+
+{% block content %}
+{% load thumbnail %}
+
+
+{% load pagination_tags %}
+{% autopaginate topic_list 10 %}
+
+<div id="wrap">
+	<!--nav 头部-->
+	 {% include "includes/nav.html" %} 
+	<!--end nav-->
+
+
+<!--导航条-->
+	<ul class="breadcrumb">
+	    <li><a href="/">首页</a> <span class="divider">/</span></li>
+	    <li><a href="/mygroups">小组广场</a> <span class="divider">/</span></li>
+	    <li class="active">{{group.title}}</li>
+    </ul>
+<!--中间内容-->
+<div id="content_wrap" class="container">
+	<div class="row ">
+		<div id="group_head" class="span11 offset1">
+			<div class="span1"><a href="{{ group.get_absolute_url }}">
+				<img class="img-rounded" src="{{ group.icon|thumbnail_url:'group-mini' }}" alt=""  rel="tooltip" title="{{group.title}}" />
+				</a></div>
+			<div class="span3"><h3>{{group.title}}</h3></div>
+			
+			<div class="span2">
+				{% load groups %}
+				{% if group|is_member:user %}
+				{% else %}
+				<a href="join"><button type="submit" class="btn btn-primary">+加入小组</button></a>
+				{% endif %}
+
+				{% if group|is_owner:user %}
+			        <a class="btn btn-primary" href="{% url edit group.pk %}"><i class="icon-edit icon-white"></i>  编辑小组</a>
+			        <a class="btn btn-success disabled" href="#"><i class="icon-edit icon-white disabled"></i>  管理小组</a>
+
+			    {% endif %}
+
+			</div>
+			
+<!--加入小组。退出小组，if else-->
+
+		</div>
+		<div class="span7 offset1">
+			<div id="group_board" class="span6">
+
+				<p>创建于{{group.created|date:"Y-m-d h:m:s"}} 组长：<a href="{{ group.creator.get_absolute_url }}">{{ group.creator }}</a></p>
+				<div id="group_content" class="span6">
+
+					  {% if group.tease %}
+					    <div class="tease">
+					      {% if  group.use_markdown%}
+					        {% load groups markup %}
+
+					      {{ group.tease|markdown }}
+					      {% else %}
+					      <pre>{{ group.tease }}</pre>
+					      {% endif %}
+					    </div>
+					  {% endif %}
+				</div>				
+			</div>
+
+			<div class="span6 clearfix" style="padding:15px;">
+
+			{% include "includes/bshare.html" %}
+			<code><i class="icon-share"></i> 分享给朋友</code>
+			<a class="btn btn-mini btn-primary offset2" href="{% url topic_create group.pk %}?next={{ request.path }}" style="margin-right: 20px">+ 创建话题</a>
+			</div>
+
+			
+
+			<div id="table_content" class="span6">
+				<table class="olt span6">
+					<tbody>
+						<tr class="pl">
+							<td class="subject">话题</td>
+							<td class="author">作者</td>
+							<td class="reply">回应</td>
+							<td>创建时间</td>
+						</tr>						
+						{% for topic in topic_list %}
+						<tr class="pl">
+							<td class="subject"><a href="{{  topic.get_absolute_url }}">{{ topic.title }}</a></td>
+							<td class="author"><a href="{{ topic.user.get_absolute_url }}">{{ topic.user.username }}</a></td>
+							<td class="reply">{{topic.messages.all|length}}</td>
+							<td>{{topic.created|date:"Y-m-d"}}</td>
+						</tr>
+						{% endfor %}
+
+					</tbody>
+				</table>
+			</div>
+			<div class=" span6">
+    			<ul class="pager">
+					{% paginate %}
+				</ul>
+   			</div>
+		</div>
+		<div class="span3">
+			<div id="latest-joining">
+				<div id="latest-joining-title">
+					<h4><a href="#">more>></a>最近加入</h4>
+				</div>
+				<div id="imglist">
+  				    <ul class="thumbnails" style="margin-top:20px;text-align:center;">
+						
+						{% if member_list %}
+
+						{% load avatar_tags %}
+
+						{% for member in member_list %}
+    					<li class="span1">
+						        	<a href="{{ member.user.get_absolute_url }}">
+									{% avatar member.user 90 %}
+									<p class="text-center" >{{member.user.username}}</p>
+						        	</a>
+
+						</li>
+						{% endfor %}
+
+						{% endif %}
+    					
+   					 						 						
+    			  </ul>
+				</div>
+			</div>
+			<!--标签-->
+			<div id="hot-topic">
+				<p>热门话题</p>
+				<p>----------------</p>
+				<ul>
+					<li></li>
+				</ul>
+			</div>
+			
+		</div>
+	</div>
+</div>
+
+
+
+	<!--footer 底部-->
+	{% include "includes/footer.html" %}
+	<!--end footer-->
+	
+</div>
+{% endblock %} 

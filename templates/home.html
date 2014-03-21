@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% block title %}
+    home
+{% endblock %}
+
+{% block content %}
+
+{% load avatar_tags %}
+
+<div class="userinfo">  
+                {% if user.is_authenticated %}  
+                    欢迎您:{{user.username}} 
+                {% avatar user 30%}
+                <a href="{% url avatar_change %}">修改头像</a>
+                {% else %}  
+                    <a href="/accounts/login">登录</a>  
+                    <a href="/accounts/register">注册(需要后台审核)</a>  
+                {% endif %}  
+                <a href="/accounts/logout">注销</a>  
+                
+                <ul id='url_enter'>
+                <p>---------------------1.0--------------------------</p>
+
+                <li><a href="/accounts/login">登录</a></li>
+                <p>-----------------------问题与回答------------------------</p>
+                <li><a href="/question">列出所有问题（分页）</a></li>
+                <li><a href="/question/q/1">按id取出问题与答案</a></li>
+                <li><a href="/question/aall">列出所有答案</a></li>
+                <li><a href="/question/a/1">列出答案通过问题id</a></li>
+                <li><a href="/question/question/create/">新建问题</a></li>
+                <li><a href="/question/answer/create/">新建答案</a></li>
+                <li><a href="/question/answer/list/">答案清单（分页）</a></li>
+                
+
+                <p>*************************2.0********************************</p>
+
+`               <li>-----------------------资讯------------------------------</li>
+                <li><a href="/info/">资讯</a></li>
+                <li><a href="/info/q/1">按id取出资讯详情</a></li>
+
+                <p>---------------------社会化功能------------------------</p>
+                <li><a href="/mygroups">小组</a></li>
+                <li><a href="/myre/following/wu/">关注功能(登录后可用)</a></li>
+
+
+                
+------社会化评论功能---------
+{% load duoshuo_tags %}
+
+{% duoshuo_comments %}
+
+                
+                </ul>
+            </div> 
+            
+{% endblock %} 

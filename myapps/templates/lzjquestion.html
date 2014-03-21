@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+{% block title %}
+    question
+{% endblock %}
+
+{% block extra_head %}
+
+<link rel="stylesheet" type="text/css" href="/static/css/Q&A/reset.css">
+<link rel="stylesheet" type="text/css" href="/static/css/Q&A/style_test.css">
+
+
+{% endblock %}
+{% block content %}
+<!--分页-->
+{% load pagination_tags %}
+{% autopaginate list_items 10 %}
+<body>
+<div id="wrap">
+	<!--nav 头部-->
+	 {% include "includes/nav.html" %} 
+	<!--end nav-->
+<!--导航条-->
+	<ul class="breadcrumb">
+	    <li><a href="/">首页</a> <span class="divider">/</span></li>
+	    <li class="active">问题列表</li>
+    </ul>
+<!--中间内容-->
+<div id="content_wrap" class="container">
+	<div class="row">
+		<div id="title" class="span11 offset1"><h3>问题列表<a href="{% url create_question %}?next={{ request.path}}">+我要提问</a></h3></div>
+		
+		<div class="span6 offset1">
+			<div>
+				<a href="#"><img src="/static/img/q&a/test.jpg" style="margin:10px 0" ></a>
+			</div>
+			<div id="table_content">
+				<table class="olt" width="100%">
+					<tbody>
+
+						<tr class="pl">
+							<td class="subject">话题</td>
+							<td class="author">作者</td>
+							<td class="text-right">回复时间</td>
+						</tr>
+
+						{% for question in list_items %}
+
+
+						<tr class="pl">
+
+							<td class="td_subject"><a href="q/{{ question.id}}">{{ question.description|slice:":20"}}..</a></td>
+							<td class="td_reply"><a href="/users/{{ question.owner.username }}">{{ question.owner.username }}</a></td><!--回复-->
+							<td class="td_time reply text-right">{{ question.pub_date|date:"Y-m-d" }}</td>
+						</tr>
+					{% endfor %}
+					</tbody>
+				</table>
+			</div>
+			<!--<div class="pagination pagination-centered">-->
+			<div class="">
+    			<!--
+    			<ul>
+    				<li class="disabled"><a href="#">Prev</a></li>
+    				<li><a href="#">1</a></li>
+    				<li><a href="#">2</a></li>
+    				<li><a href="#">3</a></li>
+    				<li><a href="#">4</a></li>
+    				<li><a href="#">5</a></li>
+    				<li><a href="#">Next</a></li>
+    			</ul>
+    			-->
+
+				<ul class="pager">
+				{% paginate %}
+				</ul>
+
+   			</div>
+		</div>
+
+<!--right nav-->		
+	{% include "includes/right_nav.html" %}
+<!--end right nav-->
+
+
+	</div>
+</div>
+
+
+
+	<!--footer 底部-->
+	{% include "includes/footer.html" %}
+	<!--end footer-->
+	
+</div>
+
+
+{% endblock %} 

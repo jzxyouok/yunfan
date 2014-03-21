@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block title %}
+    test information
+{% endblock %}
+
+
+{% block content %}
+{{hello}}
+<P>------------------------</P>
+    <h2>资讯列表</h2>
+    {% for information in list_items.object_list %}<!--  href="/q/{{ information.id }}/" 指向域名之后，而q/指向当前目录之后-->
+        
+       {{ information.id }}. 话题：<a href="i/{{ information.id }}/">{{ information.title }} </a>
+        ：{{ information.description }}
+            --by:<a href="/p/{{ information.owner }}/">{{ information.owner.username }}</a> @ {{ information.pub_date|date:"Y-m-d" }}
+           
+    </br>
+    {% endfor %}
+   
+
+{% if list_items.has_previous %}
+    <a href="?page={{ list_items.previous_page_number }}">上一页</a>
+{% endif %}
+
+<span class="current">
+    第{{ list_items.number }}页，共{{ list_items.paginator.num_pages }}页
+</span>
+
+{% if list_items.has_next %}
+        <a href="?page={{ list_items.next_page_number }}">下一页</a>
+{% endif %}
+<p>
+<a href="create">新建资讯</a>
+</p>
+{% endblock %}
+
+

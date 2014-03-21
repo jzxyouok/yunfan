@@ -1,0 +1,13 @@
+hello user
+{% load avatar_tags %}
+
+{% if user.is_authenticated %}  
+欢迎您:{{user.username}} 
+{% avatar user 50 %}
+
+<p>
+	<a href="{% url avatar_change %}">修改头像</a>
+</p>
+{%  else %}
+请登录
+{% endif %}

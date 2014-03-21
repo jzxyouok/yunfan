@@ -1,0 +1,135 @@
+{% extends "lzj_question_base.html" %}
+{% block title %}
+    校内导航
+{% endblock %}
+
+{% block extra_head %}
+<link rel="stylesheet" type="text/css" href="/static/css/group/reset.css">
+<link rel="stylesheet" type="text/css" href="/static/css/group/style.css">
+<link rel="stylesheet" type="text/css" href="/static/css/Q&A/style_test.css">
+
+
+
+{% endblock %}
+
+
+{% block content %}
+
+
+<div id="wrap">
+
+  <!--nav 头部-->
+   {% include "includes/nav.html" %} 
+  <!--end nav-->
+
+<!--导航条-->
+  <ul class="breadcrumb">
+      <li><a href="/">首页</a> <span class="divider">/</span></li>
+      <li class="active">校内导航</li>
+    </ul>
+
+<!--中间内容-->
+<div id="form-wrap" class="container">
+    <div class="span9 offset1"><h3>大学生活的入口</h3></div>
+    <div class="span6 offset1">
+        <ul class="thumbnails span7">
+                    <li class="">
+            <div class="thumbnail">
+              <a href="http://202.206.208.65/">
+              <img class="img-rounded" src="/static/img/newstudents/ncepu/hdbd.jpg"  alt="140x140">
+              <h4>校网</h4>
+              
+              </a>
+            </div>
+          </li>
+
+          <li class="">
+            <div class="thumbnail">
+              <a href="http://nclass.ncepubd.edu.cn/eol/homepage/common/opencourse/">
+              <img class="img-rounded" src="/static/img/newstudents/ncepu/wljxpt.jpg"  alt="140x140">
+              <h4>网络教学平台</h4>
+              </a>
+            </div>
+          </li>
+
+          <li class="">
+            <div class="thumbnail">
+              <a href="http://202.206.223.101/vod/">
+              <img class="img-rounded" src="/static/img/newstudents/ncepu/vod.jpg"  alt="140x140">
+              <h4>流媒体服务平台</h4>
+              </a>
+            </div>
+          </li>
+          <li class="">
+            <div class="thumbnail">
+              <a href="http://202.206.214.254/">
+              <img class="img-rounded" src="/static/img/newstudents/ncepu/tsg.jpg"  alt="140x140">
+              <h4>图书馆</h4>
+              </a>
+            </div>
+          </li>
+
+          <li class="">
+            <div class="thumbnail">
+              <a href="http://59.67.225.73/jiaowuchu/">
+              <img class="img-rounded" src="/static/img/newstudents/ncepu/jwxx.jpg"  alt="140x140">
+              <h4>教务处</h4>
+              </a>
+            </div>
+          </li>
+
+          <li class="">
+            <div class="thumbnail">
+              <a href="http://59.67.225.8/">
+              <img class="img-rounded" src="/static/img/newstudents/ncepu/downpu.jpg"  alt="140x140">
+              <h4>down铺下载</h4>
+              </a>
+            </div>
+          </li>
+
+          <li class="">
+            <div class="thumbnail">
+              <a href="http://www.ncepubbs.cn/">
+              <img class="img-rounded" src="/static/img/newstudents/ncepu/ylyn.png"  alt="140x140">
+              <h4>缘路有你</h4>
+              </a>
+            </div>
+          </li>
+
+
+        </ul>
+
+
+
+    </div>
+
+    <div class="span3 offset1">
+      <div class="offset1" id="first">
+        <h3>link</h3>
+        <div>
+          <ul class="unstyled">
+            <li><a href="http://www.douban.com">豆瓣</a></li>
+            <li><a href="http://www.zhihu.com">知乎</a></li>
+            <li><a href="http://www.guokr.com">果壳</a></li>
+            <li><a href="http://www.5sing.com">5sing</a></li>
+            <li><a href="http://www.v2ex.com">v2ex</a></li>
+            <li><a href="http://www.github.com">github</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+</div>
+
+
+
+  <!--footer 底部-->
+  {% include "includes/footer.html" %}
+  <!--end footer-->
+
+</div>
+
+
+
+
+{% endblock %}

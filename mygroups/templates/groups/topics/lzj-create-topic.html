@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+{% block title %}
+    create group
+{% endblock %}
+
+{% block extra_head %}
+<link rel="stylesheet" type="text/css" href="/static/css/group/reset.css">
+<link rel="stylesheet" type="text/css" href="/static/css/group/bootstrap-tag.css">
+<link rel="stylesheet" type="text/css" href="/static/css/group/style.css">
+{% endblock %}
+
+{% block content %}
+<div id="wrap">
+	<!--nav 头部-->
+	 {% include "includes/nav.html" %} 
+	<!--end nav-->
+
+<!--导航条-->
+	<ul class="breadcrumb">
+	    <li><a href="/">首页</a> <span class="divider ">/</span></li>
+	    <li><a href="/mygroups/{{topic.group.pk}}">回到小组</a> <span class="divider">/</span></li>
+	    <li class="active">创建话题</li>
+    </ul>
+<!--中间内容-->
+	<div id="form-wrap" class="container ">
+		<div class="span9 offset2"><h3>申请创建小组</h3></div>
+		<div class="span4 offset2">
+			
+			<form action=".{% if request.GET.next %}?next={{ request.GET.next }}{% endif %}" method="post" autocomplete="off" enctype="multipart/form-data">{% csrf_token %}
+				
+				<div id="input-wrap" class="clearfix">
+					<label>话题名称:</label>
+					<div id="input" class="span3">
+						{{ form.title}}
+					</div>					
+				</div>
+				<div id="input-wrap" class="clearfix">
+					<label>话题介绍:</label>
+					<div id="input" class="span3">
+						{{ form.description}}
+					</div>			
+				</div>
+			
+				<div id="input-wrap" class="clearfix">
+					<label></label>
+					<div id="input" class="span3">
+						<p class="submit"><button class="btn btn-primary" class-type="submit">创建话题</button></p>
+					</div>			
+				</div>
+			</form>
+
+		
+
+		</div>
+		<div class="span4">
+			<div id="reminder" class="offset1">
+				<h4>话题创建</h4>
+				<div>
+					<p>。。。</p>
+				</div>
+			</div>
+			<div id="reminder" class="offset1">
+				<h4>话题内容</h4>
+				<div>
+					<p>可用markdown </p>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+	<!--footer 底部-->
+	{% include "includes/footer.html" %}
+	<!--end footer-->
+
+</div>
+
+
+
+{% endblock %} 

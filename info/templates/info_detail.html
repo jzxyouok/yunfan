@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block title %}
+    test information
+{% endblock %}
+
+<!-- http://www.bshare.cn/help/customShareContent -->
+{% block content %}
+{{information.owner}}发布资讯：{{ information.description }} <br/>
+<p class="BSHARE_TEXT" display=none>hello</p> 
+<div class="bshare-custom"><div class="bsPromo bsPromo1"></div><a title="分享到人人网" class="bshare-renren"></a><a title="分享到QQ空间" class="bshare-qzone"></a><a title="分享到新浪微博" class="bshare-sinaminiblog"></a><a title="分享到豆瓣" class="bshare-douban"></a><a title="分享到腾讯微博" class="bshare-qqmb"></a><a title="分享到开心网" class="bshare-kaixin001"></a><a title="分享到Google书签" class="bshare-bgoogle"></a><a title="更多平台" class="bshare-more bshare-more-icon more-style-addthis"></a><span class="BSHARE_COUNT bshare-share-count">0</span></div><script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/button.js#style=-1&amp;uuid=&amp;pophcol=3&amp;lang=zh"></script><script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/bshareC0.js"></script>{% endblock %} 

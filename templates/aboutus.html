@@ -1,0 +1,189 @@
+{% extends "base.html" %}
+{% block title %}
+    aboutus
+{% endblock %}
+
+{% block extra_head %}
+	<link rel="stylesheet" href="/static/css/aboutus/docs.css">
+    
+    <style type="text/css">
+#scrollUp {
+    background: url("img/top.png") no-repeat scroll 0 0 transparent;
+    bottom: 20px;
+    height: 38px;
+    right: 20px;
+    width: 38px;
+}
+.jumbotron{
+    background: linear-gradient(50deg, #0088CC 0%, #0088CC 90%) repeat scroll 0 0 transparent;
+    box-shadow: 0 3px 7px rgba(0, 0, 0, 0.2) inset, 0 -3px 7px rgba(0, 0, 0, 0.2) inset;*/
+    color: #FFFFFF;
+    padding: 40px 0;
+    position: relative;
+    text-align: center;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4), 0 0 30px rgba(0, 0, 0, 0.075);
+}
+	</style>
+{% endblock %}
+
+
+{% block content %}
+
+<body>
+   <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner ">
+        <div class="container">
+          <button data-target=".nav-collapse" data-toggle="collapse" class="btn btn-navbar" type="button">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a href="/" class="brand">云帆</a>
+          <div class="nav-collapse collapse">
+            <ul class="nav">
+              <li class="">
+                <a href="/">首页</a>
+              </li>
+              
+              <li class="active">
+                <a data-bootstro-step="1" class="bootstro" href="#">关于我们</a>
+              </li>
+               
+              <li class="">
+                <a data-bootstro-step="2" data-bootstro-placement="bottom"  class="bootstro" href="#">联系我们</a>
+              </li>                      	
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>       
+
+	<header id="overview" class="jumbotron subhead">
+	  <div class="container">
+	    <h1>云帆</h1>
+	    <p class="lead">社会化威客平台</p>
+	  </div>
+	</header>
+
+	<ul class="breadcrumb">
+	    <li><a href="/">首页</a> <span class="divider">/</span></li>
+	    <li class="active">关于我们</li>
+    </ul>
+
+   <div class="container">
+        
+        <div class="row">
+        	<div class="span3 bs-docs-sidebar">
+		        <ul class="nav nav-list bs-docs-sidenav affix-top">
+		          <li class="active"><a href="#do"><i class="icon-chevron-right"></i>we are doing..</a></li>
+		          <li ><a href="#like"><i class="icon-chevron-right"></i>we like..</a></li>
+		          <li><a href="#use"><i class="icon-chevron-right"></i> we use..</a></li>		          
+		          <li><a href="#ifyou"><i class="icon-chevron-right"></i> if you..</a></li>
+		          <li><a href="#join"><i class="icon-chevron-right"></i> if you want to join us..</a></li>
+		        </ul>
+		    </div>
+
+ 			<div class="span9">
+				<section id="do">
+					<div class="page-header">
+			        	<h1>we are doing..</h1>
+			        </div>
+			        
+			        <div class="bs-docs-example">
+			            <p class="lead">致力于提供一个社会化威客平台</p>
+				        <ul>
+				            <li>学校与社会需求的信息借口</li>
+				       		<li>知识不仅是力量，也是财富</li>
+				       		<li>为大学生群体提供网上兼职的机会</li>
+				       	</ul>
+			        </div>
+				</section>
+				<section id="like">
+					<div class="page-header">
+			        	<h1>we like</h1>
+			        </div>
+			        
+			        <div class="bs-docs-example">
+			            <p class="lead">
+			            	<ul>
+			            	<li>Open Source</li>
+				        	<li>Ubuntu</li>
+				        	<li>Python</li>
+				        	<li>Django</li>
+				        	<li>Mongodb</li>
+				        	<li>Android</li>
+				        	<li>Bootstrap</li>
+				        	<li>Sublime Text</li>
+							<li>Zim</li>
+							<li>GitHub</li>
+							<li>Douban</li>
+
+
+				        </ul>
+			            </p>
+				        
+			        </div>
+
+				</section>
+				<section id="use">
+					<div class="page-header">
+			        	<h1>we use</h1>
+			        </div>
+
+			        <div class="bs-docs-example">
+			           <ul>
+				        	<li>Ubuntu</li>
+				        	<li>Python</li>
+				        	<li>Django</li>
+				        	<li>Sqlite</li>
+				        	<li>Git</li>
+				        	<li>Bootstrap</li>
+				        	<li>Sublime Text</li>
+
+				        </ul>
+			        </div>
+				</section>
+				
+			
+				<section id="ifyou">
+					<div class="page-header">
+			        	<h1>如果你符合以下任意一项</h1>
+			        </div>
+			        
+			        <div class="bs-docs-example"> 
+			        	<ul>
+				        	<li>创意</li>
+				        	<li>热情</li>
+				        	<li>热爱开源</li>
+				        	<li>策划能力</li>
+				        	<li>爱好编程</li>
+				        <h3>why not join us！</h3>
+
+				        </ul>
+			        </div>
+			    </section>
+				<section id="join">
+					<div class="page-header">
+			        	<h1>if you want to join us</h1>
+			        </div>
+			        
+			        <div class="bs-docs-example">
+			         <p>个人简介发送至：</p>
+			         <li>1162025955@qq.com</li>
+			         <li>wuwenjie718@gmail.com</li>
+			        </div>
+			    </section>
+			</div>
+
+        </div>
+
+       
+    </div>
+
+<a id="scrollUp" href="#top" title="" style="position: fixed; z-index: 2147483647;"></a>
+
+
+<script src="/static/js/aboutus/application.js"></script>
+
+
+{% endblock %}

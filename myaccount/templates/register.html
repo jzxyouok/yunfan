@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load bootstrap_toolkit %}
+
+{% block title %}Create an account{% endblock %}
+
+{% block content %}
+  <h1>Create an account</h1>
+
+  <table>  
+  <form class="form-vertical" action="" method="post">
+          {% csrf_token %}
+          {{ form|as_bootstrap:"horizontal" }}
+  <!-- 'vertical' change as layout -->
+          <label class="checkbox"><input type="checkbox" /> 同意注册</label> 
+          {% if layout == "horizontal" %}
+              <p class="form-actions">
+                  <input type="submit" value="Submit" class="btn btn-primary">
+              </p>
+          {% else %}
+              <input type="submit" value="Submit" class="btn btn-primary">
+          {% endif %}
+  </form>
+  </table>    
+{% endblock %}

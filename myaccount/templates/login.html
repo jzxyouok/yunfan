@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block title %}login{% endblock %}
+
+{% block content %}
+
+  {% if error %}
+    <div class="alert">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    <strong>sorry!</strong> 用户名或密码错误
+    </div>
+  {% endif %}
+
+
+  <form action="" method="post"> {% csrf_token %}
+    <label for="username">用户名:</label>
+    {{form.username}}
+    <label for="password">密码:</label>
+    {{form.password}}
+    <label for="submit"></label>
+    <input type="submit" class="btn btn-primary"  value="登录" />
+    <input type="hidden" name="next" value="{{ next|escape }}" />
+  </form>
+
+
+
+{% endblock %}

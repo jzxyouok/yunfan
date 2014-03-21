@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}
+    test question
+{% endblock %}
+
+
+{% block content %}
+{{question.owner}}问：{{ question.description }} <br/>
+<!--  注释：这是外键的是使用方法,input可以作为本则信息的标志，核心是pk，用于定位数据-->
+{% for answer in question.answer_set.all %} 
+{% comment %}
+<input type="radio" name="{{ answer.id }}" value="{{ answer.id }}">{{ answer }}  <br/>
+{% endcomment %}
+<li>{{answer.owner}}回答：{{answer.description}}</li>
+
+{% endfor %}
+<p>--------------------------</p>
+
+
+
+------社会化评论功能---------
+{% load duoshuo_tags %}
+
+{% duoshuo_comments %}
+<span class="ds-thread-count" data-thread-key="1" data-count-type="comments"></span><!-- 多说js加载开始，一个页面只需要加载一次 -->
+{% endblock %} 

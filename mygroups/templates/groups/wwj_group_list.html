@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block title %}
+    mygroup
+{% endblock %}
+
+{% block extra_head %}
+
+{% endblock %}
+
+
+{% block content %}
+{% if membership_list %}
+    <h3>当前用户所属的组</h3>
+    <div class="list">
+      <ul>
+        {% for group in membership_list %}
+          <li><a href="{{ group.get_absolute_url }}">{{ group }}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+  {% endif %}
+
+  {% if group_list %}
+    <h3>所有小组</h3>
+    <div class="list">
+      <ul>
+        {% for group in group_list %}
+          <li><a href="{{ group.get_absolute_url }}">{{ group }}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+  {% endif %}
+  
+  {% if user.is_authenticated %}
+    <p><a class="btn btn-primary" href="create?next={{ request.path }}">新建小组</a></p>
+  {% endif %}
+
+
+{% endblock %} 

@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %} 所有的问题 {% endblock %}
+
+
+
+{% block content %}
+    <h2>问题列表</h2>
+    {% for answer in answer_list %}
+        {{ answer.id }}. <a href="/q/{{ answer.id }}/">{{ answer.title }} </a>
+            <br/>&nbsp;&nbsp;&nbsp;&nbsp;({{ answer.right_count }}/{{ answer.wrong_count }})  by <a href="/p/{{ answer.owner }}/">{{ answer.owner.username }}</a> @ {{ answer.pub_date|date:"Y-m-d" }}
+        <br/>
+    {% endfor %}
+
+{% endblock %}

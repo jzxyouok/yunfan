@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}
+    test answer
+{% endblock %}
+
+
+{% block content %}
+
+{% for answer in answer_list %}
+{{ answer.owner }}回答：{{ answer.description }} <br/>
+{% endfor %}
+
+{% endblock %} 

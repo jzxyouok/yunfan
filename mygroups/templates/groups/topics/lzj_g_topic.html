@@ -1,0 +1,145 @@
+{% extends "base.html" %}
+{% block title %}
+  {{ topic.title }}
+{% endblock %}
+
+{% block extra_head %}
+
+<link rel="stylesheet" type="text/css" href="/static/css/Q&A/reset.css">
+<link rel="stylesheet" type="text/css" href="/static/css/Q&A/style_test.css">
+<style type="text/css" media="screen">
+	pre{}
+</style>
+
+
+{% endblock %}
+
+
+{% block content %}
+<div id="wrap">
+
+{% load pagination_tags %}
+{% autopaginate messages 10 %}
+	<!--nav 头部-->
+	 {% include "includes/nav.html" %} 
+	<!--end nav-->
+
+
+<!--导航条-->
+	<ul class="breadcrumb">
+	    <li><a href="/">首页</a> <span class="divider">/</span></li>
+	    <li><a href="/mygroups/{{topic.group.pk}}">回到小组</a> <span class="divider">/</span></li>
+	    <li class="active">{{topic.title}}</li>
+    </ul>
+
+<!--中间内容-->
+<div id="content_wrap" class="container">
+
+	<div class="row">
+		<div class="span11 offset1"><h3>{{question.title}}</h3></div>
+		<div class="span7 offset1">
+			<div id="topic_wrap" class="span6" >
+				<div id="userface" class="span1">
+					<a href="{{ topic.user.get_absolute_url }}">
+						{% load avatar_tags %} 
+						{% avatar topic.user 70 %}
+
+					</a>
+				</div>
+				<div class="span5">
+					<p>
+						<span class="from">来自:<a href="{{ topic.user.get_absolute_url }}">{{ topic.user }}</a></span>
+						<span class="time">{{ topic.created|date:"Y-m-d h:m:s" }}</span>
+						<!--
+						{% if topic.user == user %}
+					    <a class="edit" href="{{ topic.get_edit_url }}">Edit</a>
+					    {% endif %}
+						-->
+					</p>
+
+					<div class="toptic_content">
+						<p>
+						<h3>话题：{{ topic.title }}</h3>
+						<!--can use markdown-->
+						</p>
+
+						
+
+					</div>
+				</div>
+			</div>	
+<!--话题内容-->
+			<div  class="span7" style="margin-top:20px;" >
+				<pre id="topic_content_pre">{{ topic.description }}</pre>
+			
+			</div>
+<!--话题内容-->
+
+<!--分享给朋友-->
+			
+
+			<div id="tab" class="span7">
+			<div>
+			{% include "includes/bshare.html" %}
+			<code><i class="icon-share"></i>分享话题给朋友</code>
+			</div>
+		</div>
+
+
+<!--评论内容-->
+			<div  class="span7">
+				<a href="#reply">评论</a>
+			</div>
+			<div id="comment" class="span7">
+
+						{% for message in messages %}
+							
+						        <pre id="topic_comment_pre" class='span6' style="margin-bottom:10px;margin-top:10px;">{{ message.message}}</pre>
+						        <p class="byline text-right span5">------by <a href="{{ message.user.get_absolute_url }}">{{ message.user.username }}</a>  {{ message.created|timesince }} 之前.
+						          </p>
+						    <br>
+						{% endfor %}
+				<div class=" span6">
+    			<ul class="pager">
+					{% paginate %}
+				</ul>
+   			</div>
+
+			</div>
+			
+			<div id="comment_wrap" class="span5">
+				<div id="comment" class="span5">
+					    {% if user.is_authenticated %}  
+						<form action="{% url message_create group.pk, topic.id %}?next={{ request.path }}" method="post">{% csrf_token %}
+						
+						<div id="reply" class="span5">
+					    <p>{{ message_form.message }}</p>
+					    </div>
+
+					    <p class="submit">
+					      <button class="btn btn-primary" type="submit" name="post" value="">提交评论</button>
+					    </p>
+ 						</form>
+						{% else %}
+						<a href="/accounts/login?next={{ request.path}}">登录后评论</a>
+						{% endif %}
+				</div>
+			</div>
+		</div>
+
+		<!--right nav-->		
+		{% include "includes/right_nav.html" %}
+		<!--end right nav-->
+
+	</div>
+		
+</div>
+
+	<!--footer 底部-->
+	{% include "includes/footer.html" %}
+	<!--end footer-->
+	
+</div>
+
+
+{% endblock %} 

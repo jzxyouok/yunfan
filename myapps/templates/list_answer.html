@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block title %} 答案清单 {% endblock %}
+
+{% block content %} 
+<div class="container">    
+    <div class="page-header">
+    <h2>答案清单</h2>
+</div>
+{% for item in list_items.object_list %}
+<div class="row" style="padding-top:10">
+    <div class="span3 media-grid">
+       
+        <p>{{item.description}}</p>
+        <p> ---{{item.pub_date}}</p>
+    </div>
+    <div class="span-two-thirds">
+        <h4>{{item.title}}</h4>
+        {{item.question}}
+    </div>
+    <div class="span2" style="align:right">
+        <p><a class="btn btn-primary" href="{% url myapps.views.show_all_questions %}">查看</a></a> </p>
+        <p><a class="btn btn-success" href="{% url myapps.views.show_all_questions %}">编辑</a> </p>
+        <p><a class="btn btn-danger" href="#">删除</a></p>
+    </div>
+</div>
+{% endfor %}
+{% if list_items.has_previous %}
+    <a href="?page={{ list_items.previous_page_number }}">上一页</a>
+{% endif %}
+
+<span class="current">
+    第{{ list_items.number }}页，共{{ list_items.paginator.num_pages }}页
+</span>
+
+{% if list_items.has_next %}
+        <a href="?page={{ list_items.next_page_number }}">下一页</a>
+{% endif %}
+<p>
+<a href="{% url myapps.views.show_all_questions   %}">新建问题</a>
+</p>
+{% endblock %}

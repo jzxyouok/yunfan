@@ -1,0 +1,123 @@
+{% extends "base.html" %}
+{% block title %}
+    create group
+{% endblock %}
+
+{% block extra_head %}
+<link rel="stylesheet" type="text/css" href="/static/css/group/reset.css">
+<link rel="stylesheet" type="text/css" href="/static/css/group/bootstrap-tag.css">
+<link rel="stylesheet" type="text/css" href="/static/css/group/style.css">
+{% endblock %}
+
+{% block content %}
+<div id="wrap">
+	
+	<!--nav 头部-->
+	 {% include "includes/nav.html" %} 
+	<!--end nav-->
+
+
+<!--导航条-->
+	<ul class="breadcrumb">
+	    <li><a href="/">首页</a> <span class="divider">/</span></li>
+	    <li><a href="/mygroups">小组广场</a> <span class="divider">/</span></li>
+	    <li class="active">创建小组</li>
+    </ul>
+
+<!--中间内容-->
+	<div id="form-wrap" class="container">
+		<div class="span9 offset2"><h3>申请创建小组</h3></div>
+		<div class="span4 offset2">
+			
+			<form action="" method="post" autocomplete="off" enctype="multipart/form-data">{% csrf_token %}
+				
+				<div id="input-wrap" class="clearfix">
+
+					<label>小组名称:</label>
+					<div id="input" class="span3">
+						{{ form.title}}
+						<div  class="text-error">
+						{{form.title.errors}}
+						</div>
+					</div>					
+				</div>
+				<div id="input-wrap" class="clearfix">
+
+					<label>小组介绍:</label>
+					<div id="input" class="span3">
+						{{ form.tease}}
+					<p class="alert-info">使用markdown格式：{{ form.use_markdown}}</p>
+						<div  class="text-error">
+						{{form.tease.errors}}
+						</div>
+					</div>			
+				</div>
+				<div id="input-wrap" class="clearfix">
+					<label>小组图片:</label>
+					<div id="input" class="span3" h>
+						<!--本质就是input name=icon-->
+						{{ form.icon}}
+					<p class="alert alert-warning ">图片尺寸最好为140X140</p>
+					{% if size_error %}
+					<p class="alert alert-warning">{{size_error}}</p>
+					{% endif %}
+					</div>			
+				</div>
+			<!--
+				<div id="input-wrap" class="clearfix">
+					<label>小组标签:</label>
+					<div id="input" class="span3">
+						<input type="text" placeholder="小组标签">
+					</div>
+				</div>
+				<div id="input-wrap" class="clearfix">
+					<label>联系电话:</label>
+					<div id="input" class="span3">
+						<input type="text" placeholder="联系电话">
+					</div>		
+				</div>
+				<div id="input-wrap" class="clearfix">
+					<label></label>
+					<div id="input" class="span3">
+						<input type="checkbox"> 检查完毕
+					</div>			
+				</div>
+			-->
+				<div id="input-wrap" class="clearfix">
+					<label></label>
+					<div id="input" class="span3">
+						<p class="submit"><button class="btn btn-primary" class-type="submit">创建小组</button></p>
+					</div>			
+				</div>
+			</form>
+
+		
+
+		</div>
+		<div class="span4">
+			<div id="reminder" class="offset1">
+				<h4>小组创建······</h4>
+				<div>
+					<p>小组需要审核通过后才能完成创建,管理员会在3日内审核 </p>
+				</div>
+			</div>
+			<div id="reminder" class="offset1">
+				<h4>小组标签······</h4>
+				<div>
+					<p></p>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+	<!--footer 底部-->
+	{% include "includes/footer.html" %}
+	<!--end footer-->
+
+</div>
+
+
+
+{% endblock %} 

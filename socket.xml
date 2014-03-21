@@ -1,0 +1,8 @@
+<uwsgi>
+    <socket>:8087</socket>
+    <processes>4</processes>
+    <chdir>/home/wwj/myyunfan/</chdir>
+    <module>wsgi</module>
+    <daemonize>uwsgi.log</daemonize>
+</uwsgi>
+

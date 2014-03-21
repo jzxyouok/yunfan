@@ -1,0 +1,123 @@
+{% extends "lzj_question_base.html" %}
+{% block title %}
+    group
+{% endblock %}
+
+{% block extra_head %}
+<link rel="stylesheet" type="text/css" href="/static/css/group/reset.css">
+<link rel="stylesheet" type="text/css" href="/static/css/group/style.css">
+
+
+{% endblock %}
+
+
+{% block content %}
+{% load thumbnail %}
+
+{% load pagination_tags %}
+{% autopaginate group_list 9 %}
+<div id="wrap">
+
+
+  <!--nav 头部-->
+   {% include "includes/nav.html" %} 
+  <!--end nav-->
+
+<!--导航条-->
+  <ul class="breadcrumb">
+      <li><a href="/">首页</a> <span class="divider">/</span></li>
+      <li class="active">小组广场</li>
+    </ul>
+
+<!--中间内容-->
+<div id="form-wrap" class="container">
+		<div class="span9 offset1"><h3>小组广场</h3></div>
+		<div class="span6 offset1">
+   			<ul class="thumbnails span7">
+
+        {% if group_list %}
+
+          {% for group in group_list %}
+    			<li class="">
+    				<div class="thumbnail">
+    					<a href="{{ group.get_absolute_url }}">
+              
+              {% if group.icon %}
+              
+              <img class="img-rounded" src="{{ group.icon|thumbnail_url:'group' }}"  alt="" />
+    					{#<img class="img-rounded" src="/media/{{ group.icon }}"  alt="140x140">#}
+              {% else %}
+              <img class="img-rounded" src="/static/img/newstudents/food.jpg" style="width: 140px; height: 140px;" alt="140x140">
+              {% endif %}
+
+              <h4>{{ group.title|slice:":7" }}</h4>
+    					<p>{{ group.tease|slice:":10" }}</p></a>
+    				</div>
+    			</li>
+          {% endfor %}
+    		{% endif %}
+
+    		</ul>
+
+
+
+
+			<div class="pagination pagination-centered ">
+        <ul>
+          {% paginate %}
+        </ul>
+   		</div> 
+
+		</div>
+		<div class="span3 offset1">
+			<div id="latest-joining">
+				<div id="latest-joining-title">
+					<!--<h4><a href="#">more>></a>最近加入</h4>-->
+          <h4>最近加入</h4>
+				</div>
+				<div id="imglist">
+  				    <ul class="thumbnails" style="margin-top:20px">
+
+            {% for group in nav_group_list %}
+              <li class="span1">
+              <a href="{{ group.get_absolute_url }}">
+                {% if group.icon %}
+                <img class="img-rounded" src="{{ group.icon|thumbnail_url:'group-mini' }}" alt=""  rel="tooltip" title="{{group.title}}" />
+                {#<img class="img-rounded" src="/media/{{ group.icon }}" style="width: 70px; height: 60px;" alt="60x70">#}
+                {% else %}
+                <img class="img-rounded" src="/static/img/newstudents/food.jpg" style="width:70px; height:70px;" alt="70x70">
+                {% endif %}
+              <!--{{ group.title|slice:"0:10" }}-->
+              <!--使用tooltips-->
+              </a>
+              </li>
+              
+            {% endfor %}				 						
+    			  </ul>
+				</div>
+			</div>
+			<!--
+      <div id="group-tags">
+				<input type="text" data-provide="tag" value="One, Five" name="tags" style="display: none;">
+			</div>
+      -->
+      <div id="group-creation">
+        <a class="button btn btn-primary" href="create?next={{ request.path }}"><p>创建小组+</p></a>
+      </div>
+
+		</div>
+
+</div>
+
+
+
+  <!--footer 底部-->
+  {% include "includes/footer.html" %}
+  <!--end footer-->
+
+</div>
+
+
+
+
+{% endblock %} 

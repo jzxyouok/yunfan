@@ -1,0 +1,124 @@
+{% extends "base.html" %}
+{% block title %}
+ 修改头像
+{% endblock %}
+
+{% block extra_head %}
+
+<link rel="stylesheet" type="text/css" href="/static/css/user/reset.css">
+<link rel="stylesheet" type="text/css" href="/static/css/user/style.css">
+{% endblock %}
+
+
+{% block content %}
+
+
+<div id="wrap">
+
+    <!--nav 头部-->
+     {% include "includes/nav.html" %} 
+    <!--end nav-->
+
+<!--导航条-->
+    <ul class="breadcrumb">
+        <li><a href="/">首页</a> <span class="divider">/</span></li>
+        <li class="active">修改头像</li>
+    </ul>
+
+<!--中间内容-->
+<div id="content-wrap" class="container">
+    <div class="row">
+        <div class="span11 offset1">
+            
+
+            <div id="links" class="span3">
+
+            </div>
+        </div>
+        <div class="span7 offset1">
+            <div id="group_board" class="span6">
+                <div id="group_content">
+                    修改头像
+                </div>
+            </div>
+
+
+
+            <div id="group_board" class="span6">
+                <div id="group_content">
+                    {% load avatar_tags %}
+
+                    <p>"你的当前图像" </p>
+                    {% avatar user %}
+                    {% if not avatars %}
+                        <p>"您还没有上传头像，请上传"</p>
+                    {% else %}
+                        <form method="POST" action="{% url avatar_change %}">
+                            <ul>
+                                {{ primary_avatar_form.as_ul }}
+                            </ul>
+                            <p>{% csrf_token %}<input class="btn btn-primary" type="submit" value="选择当前头像" /></p>
+                        </form>
+                    {% endif %}
+                    </br>
+                    <p>上传新头像:(最好为140X140像素)<p>
+                    <form enctype="multipart/form-data" method="POST" action="{% url avatar_add %}">
+                        {{ upload_avatar_form.as_p }}
+                        <p>{% csrf_token %}<input class="btn btn-primary" type="submit" value= "上传"/></p>
+                    </form>
+                </div>
+            </div>
+
+
+
+
+        </div>
+
+        <div class="span3">
+            <div id="personal-information" class="clearfix">
+                
+                <div id="user-info" class="clearfix">
+                    家乡：河北保定
+                    <br />
+                    电话：1234566
+                    
+                </div>
+                <div id="sep-line" class="clearfix"></div>
+                <div id="introduction"><a href="">(添加自我介绍)</a></div>
+            </div>
+            <div id="latest-joining">
+                <div id="latest-joining-title">
+                    <h4><a href="#">more>></a>最近加入的小组...</h4>
+                </div>
+                <div id="imglist">
+                    <ul class="thumbnails">
+                        
+                        {% for groupmember in user_groupmember %}
+                          <li class="span1">
+                          <a href="/mygroups/{{groupmember.group.pk}}">
+                            {% if groupmember.group.icon %}
+                            <img class="img-rounded" src="/media/{{ groupmember.group.icon }}" style="width: 70px; height: 60px;" alt="60x70">
+                            {% else %}
+                            <img class="img-rounded" src="/static/img/newstudents/food.jpg" style="width:70px; height:60px;" alt="默认头像"> 
+                            {% endif %}
+                          {{ groupmember.group.title}}</a>
+                          </li>
+                        {% endfor %}    
+                                            
+                  </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!--footer 底部-->
+{% include "includes/footer.html" %}
+<!--end footer-->
+
+</div>
+
+
+{% endblock %} 

@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+{% block title %}
+    test jquery
+{% endblock %}
+{% comment %}
+                添加些信息, 比如 RSS 源, Javascript, CSS, 以及别的应该放在文档头的信息. 
+            {% endcomment %}
+{% block extra_head %}
+
+
+{% endblock %}
+
+{% block content %}
+
+{% if user.is_authenticated %}  
+                    
+            <li><a href="/"><i class="icon-user icon-glass"></i>{{user.username}} </a></li>
+            <li><a href="/accounts/logout">注销</a></li>
+          {% else %}  
+            <li><a id="login" data-toggle="modal"
+              >登陆</a></li>
+            <li><a href="/accounts/register">注册(需审核)</a></li>
+            <li><a id="test1">test1</a></li>
+            <li><a id="test2">test2</a></li>
+            <li><p id='insert'></p></li>
+          {% endif %} 
+{% endblock %} 
+
+
+
+
+
+{% block js %}
+<script src="/static/js/django-ajax-post.js"></script>
+
+<script type="text/javascript">
+
+$(document).ready(function(){
+  $("#login").click(function(){  
+  alert("hello: ");  
+           $.post("/accounts/", 
+           {"username": "wwj", "password": "56" }, 
+           function(data){ 
+            $('#insert').html(data); 
+           }  
+        );
+
+
+  });
+});
+
+
+$(document).ready(function(){
+  $("#test1").click(function(){
+    
+  alert("hello: ");  
+           $.get("/mygroups/",
+           /*需要安全字段*/ 
+           {"name": "wwj", "password": "56" }, 
+           function(data){ 
+              alert(data); 
+           }  
+        );
+  });
+});
+
+</script>
+
+{% endblock %}
+ 
+
+
+ 

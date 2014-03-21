@@ -1,0 +1,255 @@
+{% extends "base.html" %}
+{% block title %}
+    yunfan
+{% endblock %}
+
+{% block extra_head %}
+<meta name="description" content="together with you">
+<link rel="stylesheet" href="/static/css/my-bootstrap-style.css">
+<style type="text/css">
+      body {
+        padding-top: 20px;
+        padding-bottom: 60px;
+      }
+
+      /* Custom container */
+      .container {
+        margin: 0 auto;
+        max-width: 1000px;
+      }
+      .container > hr {
+        margin: 60px 0;
+      }
+
+      /* Main marketing message and sign up button */
+      .jumbotron {
+        /*margin: 80px 0;*/
+        text-align: center;
+      }
+      .jumbotron h1 {
+        font-size: 100px;
+        line-height: 1;
+      }
+      .jumbotron .lead {
+        font-size: 24px;
+        line-height: 1.25;
+      }
+      .jumbotron .btn {
+        font-size: 21px;
+        padding: 14px 24px;
+      }
+
+      /* Supporting marketing content */
+      .marketing {
+        margin: 60px 0;
+      }
+      .marketing p + h4 {
+        margin-top: 28px;
+      }
+
+
+      /* Customize the navbar links to be fill the entire space of the .navbar */
+      .navbar .navbar-inner {
+        padding: 0;
+      }
+      .navbar .nav {
+        margin: 0;
+        display: table;
+        width: 100%;
+      }
+      .navbar .nav li {
+        display: table-cell;
+        width: 1%;
+        float: none;
+      }
+      .navbar .nav li a {
+        font-weight: bold;
+        text-align: center;
+        border-left: 1px solid rgba(255,255,255,.75);
+        border-right: 1px solid rgba(0,0,0,.1);
+      }
+      .navbar .nav li:first-child a {
+        border-left: 0;
+        border-radius: 3px 0 0 3px;
+      }
+      .navbar .nav li:last-child a {
+        border-right: 0;
+        border-radius: 0 3px 3px 0;
+      }
+    </style>
+{% endblock %}
+
+
+{% block content %}
+<div class="container">
+
+  <div class="masthead">
+    <div class="navbar navbar-inverse  ">
+      <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <div class="nav-collapse controls">
+      <ul class="nav nav-pills pull-right">
+        <li class="active">
+          <a href="#">首页</a>
+        </li>
+        <li>
+          <a href="/aboutus"> <i class="icon-hand-right icon-glass"></i>
+            关于我们
+          </a>
+        </li>
+        <li>
+          <a href="#"> <i class="icon-envelope icon-glass"></i>
+            联系我们
+          </a>
+        </li>
+        {% if user.is_authenticated %}
+        <li>
+          <a href="/users/{{user}}">
+            <i class="icon-user icon-glass"></i>
+            {{user.username}}
+          </a>
+        </li>
+        <li>
+          <a href="/accounts/logout">注销</a>
+        </li>
+        {% else %}
+        <li>
+          <a href="/accounts/login/" data-toggle="modal"
+              >登陆</a>
+        </li>
+        <li>
+          <a href="/accounts/register">注册</a>
+        </li>
+        {% endif %}
+      </ul>
+      <h3 class="muted">云帆</h3>
+    </div>
+
+    <hr>
+    <!-- Jumbotron -->
+    <!--<div class="jumbotron">
+    -->
+    <div class="row">
+
+      <div class="jumbotron ">
+        {# 轮播 #}
+        <div class="span5">
+          <div class="tabbable tabs-left">
+            <ul class="nav nav-tabs">
+              <li class="active" >
+                <a href="#lA" data-toggle="tab">最新资讯</a>
+              </li>
+              <li>
+                <a href="#lB" data-toggle="tab">热门小组</a>
+              </li>
+              <li>
+                <a href="#lC" data-toggle="tab">人气评论</a>
+              </li>
+            </ul>
+
+            <div class="tab-content">
+              <div class="tab-pane active" id="lA">
+                <p>waiting...最新资讯</p>
+              </div>
+              <div class="tab-pane" id="lB">
+                <p>waiting...热门小组</p>
+              </div>
+              <div class="tab-pane" id="lC">
+                <p>waiting...人气评论</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- endspan4 -->
+
+        <div id="myCarousel" class="offset1 span6 carousel slide">
+          <ol class="carousel-indicators">
+            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+            <li data-target="#myCarousel" data-slide-to="1"></li>
+            <li data-target="#myCarousel" data-slide-to="2"></li>
+          </ol>
+          <!-- Carousel items -->
+          <div class="carousel-inner">
+            <div class="active item">
+              <img src="/static/img/home/1.jpg" alt="">
+              <div class="carousel-caption">
+                <h4>占位1</h4>
+                <p>占位1</p>
+              </div>
+            </div>
+            <div class="item">
+              <img src="/static/img/home/2.jpg" alt="">
+              <div class="carousel-caption">
+                <h4>占位2</h4>
+                <p>占位2</p>
+              </div>
+            </div>
+            <div class="item">
+              <img src="/static/img/home/3.jpg" alt="">
+              <div class="carousel-caption">
+                <h4>占位3</h4>
+                <p>占位3</p>
+              </div>
+            </div>
+          </div>
+          <!-- Carousel nav -->
+          <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+          <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
+        </div>
+        {# end轮播 #}
+      </div>
+
+    </div>
+
+    <hr>
+
+    <div class="container marketing">
+      <!-- Example row of columns -->
+      <div class="row-fluid">
+        <div class="span4">
+          <img class="img-circle"  alt="140x140" style="width: 140px; height: 140px;" src="/static/img/newstudents/tiwen.jpg">
+
+          <h2>提问</h2>
+          <p>Everything you want to konw</p>
+          <p>
+            <a class="btn btn-primary" href="/question">问题与答案 &raquo;</a>
+          </p>
+        </div>
+
+        <div class="span4">
+          <img class="img-circle"  alt="140x140" style="width: 140px; height: 140px;" src="/static/img/newstudents/zixun.jpg">
+          <h2>资讯</h2>
+          <p>Something interesting</p>
+          <p>
+            <a href="/info" class="btn btn-primary " >浏览资讯 &raquo;</a>
+          </p>
+        </div>
+
+        <div class="span4">
+          <img class="img-circle"  alt="140x140" style="width: 140px; height: 140px;" src="/static/img/newstudents/group3.jpg">
+          <h2>小组</h2>
+          <p>寻找志同道合的朋友</p>
+          <p>
+            <a class="btn btn-primary" href="/mygroups">发现小组 &raquo;</a>
+          </p>
+        </div>
+
+      </div>
+    </div>
+    <hr>
+
+    <div class="footer">
+      <p>--------------share with friends-----------------</p>
+      {% include "includes/bshare.html" %}
+      <p>&copy; 云帆 2013</p>
+    </div>
+
+  </div>
+</div>
+
+<!-- Modal login -->
+{% endblock %}

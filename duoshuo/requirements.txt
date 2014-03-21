@@ -1,0 +1,4 @@
+PyJWT
+requests
+
+#使用jwt本地评论,在util里讲得很清楚
